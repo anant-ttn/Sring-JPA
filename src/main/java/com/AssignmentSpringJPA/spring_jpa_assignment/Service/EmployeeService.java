@@ -81,4 +81,8 @@ public class EmployeeService {
     }
 
 
+//    Q11: Create and use finder to find Employees Between the age of 28 to 32
+ public List<Employee> findByAgeBetweenAge(Integer low, Integer high){
+        return employeeRepository.findByAgeBetween(low, high);
+ }
 }

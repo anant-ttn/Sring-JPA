@@ -85,9 +85,15 @@ public class EmployeeController {
     }
 
 //    q10: Create and use finder to find Employees starting with A character
-    @GetMapping("/starting-with/{cha}")
+    @GetMapping("employees/starting-with/{cha}")
     public ResponseEntity<List<Employee>> getEmployeesStartingWithA(@PathVariable String cha) {
         List<Employee> employees = employeeService.getEmployeesStartingWith(cha);
+        return ResponseEntity.ok(employees);
+    }
+
+    @GetMapping("employees/age")
+    public ResponseEntity<List<Employee>> getEmployeesStartingWithA() {
+        List<Employee> employees = employeeService.findByAgeBetweenAge(28,32);
         return ResponseEntity.ok(employees);
     }
 }
