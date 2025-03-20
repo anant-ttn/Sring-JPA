@@ -15,4 +15,6 @@ import java.util.Optional;
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
     Page<Employee> findAll(Pageable pageable);
     Optional<Employee> findByName(String name);
+    //    Q10: Create and use finder to find Employees starting with A character
+    List<Employee> findByNameStartingWith(String prefix);
 }

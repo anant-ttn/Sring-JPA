@@ -83,4 +83,11 @@ public class EmployeeController {
         System.out.println("tjhis cior");
         return new ResponseEntity<>(employeeWithName, HttpStatus.OK);
     }
+
+//    q10: Create and use finder to find Employees starting with A character
+    @GetMapping("/starting-with/{cha}")
+    public ResponseEntity<List<Employee>> getEmployeesStartingWithA(@PathVariable String cha) {
+        List<Employee> employees = employeeService.getEmployeesStartingWith(cha);
+        return ResponseEntity.ok(employees);
+    }
 }

@@ -75,5 +75,10 @@ public class EmployeeService {
 
     }
 
+//    Q10: Create and use finder to find Employees starting with A character
+    public List<Employee> getEmployeesStartingWith(String pef) {
+        return employeeRepository.findByNameStartingWith(pef);
+    }
+
 
 }
