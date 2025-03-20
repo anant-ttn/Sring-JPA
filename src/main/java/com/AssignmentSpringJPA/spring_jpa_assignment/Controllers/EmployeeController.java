@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;import java.util.List;
 
 @RestController
 public class EmployeeController {
@@ -18,11 +18,21 @@ public class EmployeeController {
     public String health(){
         return "Working fine";
     }
+
+//    Q6: Perform Read Operation on Entity using Spring Data JPA
+
+    @GetMapping("/employees")
+    public ResponseEntity<List<Employee>> getAllEmployees(){
+        List<Employee> allEmployees = employeeService.getEmployees();
+        return new ResponseEntity<>(allEmployees, HttpStatus.OK);
+    }
+
     @PostMapping("/employees")
     public ResponseEntity<Employee> createEmployee (@RequestBody Employee employee){
         Employee savedEmployee = employeeService.saveEmployee(employee);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
+
 
     @PutMapping("/employees/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {

@@ -5,6 +5,7 @@ import com.AssignmentSpringJPA.spring_jpa_assignment.Repository.EmployeeReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,6 @@ public class EmployeeService {
     //Added h2 db for this
     public Employee updateEmployee(Integer id, Employee updatedEmployee) {
         Optional<Employee> existingEmployeeOpt = employeeRepository.findById(id);
-
         if (existingEmployeeOpt.isPresent()) {
             Employee existingEmployee = existingEmployeeOpt.get();
             existingEmployee.setName(updatedEmployee.getName());
@@ -47,4 +47,11 @@ public class EmployeeService {
         }
 
     }
+//    Q6: Perform Read Operation on Entity using Spring Data JPA
+    public List<Employee> getEmployees(){
+        List<Employee> allEmployee = (List<Employee>) employeeRepository.findAll();
+        return allEmployee;
+    }
+
+
 }
