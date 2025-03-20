@@ -34,4 +34,16 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    //Q5: Perform Delete Operation on Entity using Spring Data JPA
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable Integer id){
+        try{
+            Employee employeeDeletesd = employeeService.deleteEmployee(id);
+            return new ResponseEntity<>(employeeDeletesd, HttpStatus.OK);
+        } catch (RuntimeException e) {
+//            System.out.println("This works");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

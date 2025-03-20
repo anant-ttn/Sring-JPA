@@ -34,4 +34,17 @@ public class EmployeeService {
             throw new RuntimeException("Employee with ID " + id + " not found.");
         }
     }
+
+    //Q5: Perform Delete Operation on Entity using Spring Data JPA
+    public Employee deleteEmployee(Integer id){
+        Optional<Employee> existingEmployeetoDeleteOpt = employeeRepository.findById(id);
+        if(existingEmployeetoDeleteOpt.isPresent()){
+            Employee employeeToDelete = existingEmployeetoDeleteOpt.get();
+            employeeRepository.delete(employeeToDelete);
+            return employeeToDelete;
+        } else {
+            throw new RuntimeException("Employee with ID " + id + " not found.");
+        }
+
+    }
 }
