@@ -3,8 +3,11 @@ package com.AssignmentSpringJPA.spring_jpa_assignment.Service;
 import com.AssignmentSpringJPA.spring_jpa_assignment.Entity.Employee;
 import com.AssignmentSpringJPA.spring_jpa_assignment.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Sort;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +54,14 @@ public class EmployeeService {
     public List<Employee> getEmployees(){
         List<Employee> allEmployee = (List<Employee>) employeeRepository.findAll();
         return allEmployee;
+    }
+// Q8: Implement Pagination and Sorting on the bases of Employee Age
+    public Page<Employee> getEmployeesWithPaginationAndSorting(int page, int size, String sortDirection) {
+        Sort sort = Sort.by("age"); // Sorting by age
+        sort = sortDirection.equalsIgnoreCase("desc") ? sort.descending() : sort.ascending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return employeeRepository.findAll(pageable);
     }
 
 

@@ -3,6 +3,7 @@ package com.AssignmentSpringJPA.spring_jpa_assignment.Controllers;
 import com.AssignmentSpringJPA.spring_jpa_assignment.Entity.Employee;
 import com.AssignmentSpringJPA.spring_jpa_assignment.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -62,5 +63,16 @@ public class EmployeeController {
 //            System.out.println("This works");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+//Q8: Implement Pagination and Sorting on the bases of Employee Age
+    @GetMapping("employees/paginated")
+    public ResponseEntity<Page<Employee>> getEmployeesWithPaginationAndSorting(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
+
+        Page<Employee> employees = employeeService.getEmployeesWithPaginationAndSorting(page, size, sortDirection);
+        return ResponseEntity.ok(employees);
     }
 }
