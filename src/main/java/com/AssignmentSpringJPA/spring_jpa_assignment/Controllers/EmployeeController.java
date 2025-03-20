@@ -75,4 +75,12 @@ public class EmployeeController {
         Page<Employee> employees = employeeService.getEmployeesWithPaginationAndSorting(page, size, sortDirection);
         return ResponseEntity.ok(employees);
     }
+
+//    Q9: Create and use finder to find Employee by Name
+    @GetMapping("employees/{name}")
+    public ResponseEntity<Employee> getEmployeeWuithName(@PathVariable String name){
+        Employee employeeWithName = employeeService.getEmployeeByName(name);
+        System.out.println("tjhis cior");
+        return new ResponseEntity<>(employeeWithName, HttpStatus.OK);
+    }
 }

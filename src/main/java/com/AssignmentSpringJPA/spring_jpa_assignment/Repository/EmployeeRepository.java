@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 //Q2: Set up EmployeeRepository with Spring Data JPA
 
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
     Page<Employee> findAll(Pageable pageable);
+    Optional<Employee> findByName(String name);
 }

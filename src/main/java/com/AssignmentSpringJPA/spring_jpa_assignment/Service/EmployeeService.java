@@ -64,5 +64,16 @@ public class EmployeeService {
         return employeeRepository.findAll(pageable);
     }
 
+    public Employee getEmployeeByName(String name){
+        Optional<Employee> ofNameEmployee = employeeRepository.findByName(name);
+        if(ofNameEmployee.isPresent()){
+            return ofNameEmployee.get();
+        }
+        else {
+            throw new RuntimeException("Employee with name " + name + " not found.");
+        }
+
+    }
+
 
 }
