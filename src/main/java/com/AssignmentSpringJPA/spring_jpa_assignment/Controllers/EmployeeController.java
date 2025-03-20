@@ -27,6 +27,13 @@ public class EmployeeController {
         return new ResponseEntity<>(allEmployees, HttpStatus.OK);
     }
 
+//    Q7: getting count fo all employees
+    @GetMapping("/employees/totalcount")
+    public ResponseEntity<Integer> getCountEmployees(){
+        List<Employee> allEmployees = employeeService.getEmployees();
+        return new ResponseEntity<>(allEmployees.size(), HttpStatus.OK);
+    }
+
     @PostMapping("/employees")
     public ResponseEntity<Employee> createEmployee (@RequestBody Employee employee){
         Employee savedEmployee = employeeService.saveEmployee(employee);
