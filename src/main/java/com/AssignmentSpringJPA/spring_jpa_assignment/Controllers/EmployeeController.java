@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EmployeeController {
@@ -16,9 +14,24 @@ public class EmployeeController {
     EmployeeService employeeService;
 
 
+    @GetMapping("/")
+    public String health(){
+        return "Working fine";
+    }
     @PostMapping("/employees")
     public ResponseEntity<Employee> createEmployee (@RequestBody Employee employee){
         Employee savedEmployee = employeeService.saveEmployee(employee);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/employees/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
+        try {
+            Employee updatedEmployee = employeeService.updateEmployee(id, employee);
+            return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            System.out.println("This works");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

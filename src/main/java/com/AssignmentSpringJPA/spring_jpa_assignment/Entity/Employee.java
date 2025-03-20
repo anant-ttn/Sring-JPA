@@ -13,6 +13,7 @@ public class Employee {
     Integer age;
     String location;
 
+    public Employee(){}
     //    improvement in Q1: adding the setter and getters and also constructors
     public Employee(Integer id, String name, Integer age, String location) {
         this.id = id;
